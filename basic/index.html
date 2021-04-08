@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>基本的な使い方</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="sectionTitle">右に400px移動する</h1>
+      <div class="box"></div>
+      <button class="play">もう一度はじめから再生する</button>
+    </section>
+
+    <script>
+      // アニメーションさせる要素
+      const box = document.querySelector(".box");
+
+      // 移動量
+      let moveX = 0;
+
+      /**
+       * アニメーションの各フレームでの処理
+       * @param time
+       */
+      const moveAnimation = () => {
+        // 移動量が400以下の場合に実行
+        if (moveX <= 400) {
+          moveX++;
+          // 移動量を要素に適用する
+          box.style.transform = `translateX(${moveX}px)`;
+          // ここで自分自身を呼び出して再帰処理をする
+          requestAnimationFrame(moveAnimation);
+        }
+      };
+      // アニメーションを実行する
+      moveAnimation();
+
+
+      document.querySelector("button").addEventListener("click",()=>{
+        if(moveX < 400){
+          return
+        }
+        moveX = 0;
+        moveAnimation()
+      })
+    </script>
+  </body>
+</html>

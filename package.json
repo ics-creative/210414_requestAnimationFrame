@@ -1,0 +1,13 @@
+{
+  "name": "210414_requestAnimationFrame",
+  "version": "1.0.0",
+  "repository": "git@github.com:ics-creative/210414_requestAnimationFrame.git",
+  "author": "ics-nishihara <nishihara@ics-web.jp>",
+  "scripts": {
+    "sass": "sass assets:assets --watch"
+  },
+  "devDependencies": {
+    "prettier": "2.2.1",
+    "sass": "1.32.8"
+  }
+}

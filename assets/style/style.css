@@ -1,0 +1,89 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #206fa5;
+  --sky: #6fb8d9;
+  --green: #6fb8d9;
+  --yellow: #f4c14e;
+  --red: #d36950;
+  color: #333333;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: var(--blue);
+}
+
+section {
+  max-width: 450px;
+  margin: 0 auto 24px;
+  padding: 16px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.sectionParagraph {
+  margin-bottom: 24px;
+}
+
+progress, meter {
+  display: block;
+}
+
+.backToTop {
+  display: block;
+  appearance: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #000000;
+  color: #ffffff;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 56px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.indexTitle {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.indexListWrapper {
+  position: fixed;
+  top: 16px;
+  left: 32px;
+}
+.indexListWrapper li {
+  list-style: none;
+  padding-left: 1em;
+  margin-bottom: 1em;
+}
+.indexListWrapper li a {
+  font-size: 13px;
+  color: inherit;
+  text-decoration: none;
+}
+.indexListWrapper li:before {
+  content: "-";
+  font-size: 13px;
+  margin-right: 0.5em;
+}
+
+/*# sourceMappingURL=style.css.map */

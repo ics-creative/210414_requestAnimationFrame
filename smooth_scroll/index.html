@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>汎用的なスムーススクロール</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <div class="indexListWrapper">
+      <h1 class="indexTitle">Index</h1>
+      <ul class="indexList">
+        <li><a href="#p1">Title1</a></li>
+        <li><a href="#p2">Title2</a></li>
+        <li><a href="#p3">Title3</a></li>
+        <li><a href="#p4">Title4</a></li>
+        <li><a href="#p5">Title5</a></li>
+        <li><a href="#p6">Title6</a></li>
+        <li><a href="#p7">Title7</a></li>
+      </ul>
+    </div>
+
+    <section>
+      <h1 class="sectionTitle" id="p1">Title1</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p2">Title2</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p3">Title3</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p4">Title4</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p5">Title5</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p6">Title6</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p7">Title7</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+    </section>
+    <a href="#" class="backToTop">TOP</a>
+    <script>
+      // アニメーション時間
+      const duration = 1000;
+
+      // アニメーションの開始時間を格納する変数
+      let startTime;
+
+      // アニメーションの開始時のスクロール位置を格納する変数
+      let startScrollY;
+
+      // ターゲットのスクロール位置を格納する変数
+      let targetScrollY;
+
+      /**
+       * イージング関数
+       * @param x
+       * @returns {number}
+       */
+      const easeOutCubic = (x) => {
+        return 1 - Math.pow(1 - x, 3);
+      };
+      
+
+      /**
+       * アニメーションの各フレームでの処理
+       * @param time
+       */
+      const scrollAnimation = (time) => {
+        // 現在時間がアニメーション終了時間（開始時間+継続時間）未満なら実行
+        if (time < startTime + duration) {
+          // 現在時間の継続時間に対する進捗度を算出
+          const progressRate = (time - startTime) / duration;
+          //
+          const scrollY =
+            startScrollY +
+            (targetScrollY - startScrollY) * easeOutCubic(progressRate);
+          window.scrollTo(0, scrollY);
+          // ここで自分自身を呼び出して再帰処理をする
+          requestAnimationFrame(scrollAnimation);
+        }
+      };
+
+      // トップへ戻る要素をクリックしたらスクロールアニメーション実行
+      document.querySelectorAll("a[href^='#']").forEach((element) => {
+        element.addEventListener("click", (event) => {
+          // デフォルトの挙動をキャンセル
+          event.preventDefault();
+          // ターゲットの要素を取得
+          const targetId = event.target.getAttribute("href");
+          if (targetId === "#") {
+            // href="#"の場合はページトップなので0
+            targetScrollY = 0;
+          } else {
+            // ターゲットの要素
+            const targetElement = document.querySelector(targetId);
+            // ページ全体の高さ
+            const documentHeight = document.body.clientHeight;
+            // ターゲットのY座標取得
+            if (targetElement.offsetTop + window.innerHeight > documentHeight) {
+              // ターゲットのY座標+ウィンドウ高さがページ全体の高さを超えたとき（＝そこまでスクロールできない）は、ページ一番したまでの位置を取得
+              targetScrollY = documentHeight - window.innerHeight;
+            } else {
+              // ターゲットのY座標
+              targetScrollY = targetElement.offsetTop;
+            }
+          }
+          // performance.now()で開始時間をセット
+          startTime = performance.now();
+          // 現在のスクロール位置をセット
+          startScrollY = window.scrollY;
+          scrollAnimation(startTime);
+        });
+      });
+    </script>
+  </body>
+</html>

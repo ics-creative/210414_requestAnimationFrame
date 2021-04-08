@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FPSに依らないアニメーション時間</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="sectionTitle">1秒かけて右に400px移動する</h1>
+      <div class="box"></div>
+      <button class="play">もう一度はじめから再生する</button>
+    </section>
+
+    <script>
+      // アニメーションさせる要素
+      const box = document.querySelector(".box");
+      // アニメーションの継続時間
+      const duration = 1000;
+      const moveX = 400;
+      // アニメーションの開始時間を格納する変数
+      let startTime;
+
+      /**
+       * アニメーションの各フレームでの処理
+       * @param time
+       */
+      const moveAnimation = (time) => {
+        // 現在時間がアニメーション終了時間（開始時間+継続時間）未満なら実行
+        if (time < startTime + duration) {
+          // 現在時間の継続時間に対する進捗度を算出
+          const progressRate = (time - startTime) / duration;
+          // 移動量は全体の移動量×進捗度
+          const deltaX = moveX * progressRate
+          // 移動量を要素に適用する
+          box.style.transform = `translateX(${deltaX}px)`;
+          // ここで自分自身を呼び出して再帰処理をする
+          requestAnimationFrame(moveAnimation);
+        }
+      };
+
+      // performance.now()で開始時間をセットしてアニメーションを実行する
+      startTime = performance.now();
+      moveAnimation(startTime);
+
+      document.querySelector("button").addEventListener("click", () => {
+        startTime = performance.now();
+        moveAnimation(startTime);
+      });
+    </script>
+  </body>
+</html>

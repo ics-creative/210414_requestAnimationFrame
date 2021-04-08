@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>トップへ戻るアニメーション（簡易）</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle">Tile</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+    </section>
+    <button class="backToTop">TOP</button>
+    <script>
+      // スクロール移動量
+      const moveY = 10;
+
+      /**
+       * アニメーションの各フレームでの処理
+       * @param time
+       */
+      const scrollAnimation = () => {
+        // スクロール移動量が0より大きい場合に実行
+        if (window.scrollY > 0) {
+          // 現在の位置からスクロール移動量分（10px）だけ減らしたした場所に移動させる
+          const scrollY = window.scrollY - moveY;
+          window.scrollTo(0, scrollY);
+          // ここで自分自身を呼び出して再帰処理をする
+          requestAnimationFrame(scrollAnimation);
+        }
+      };
+
+      // トップへ戻る要素をクリックしたらスクロールアニメーション実行
+      document.querySelector(".backToTop").addEventListener("click", () => {
+        scrollAnimation();
+      });
+    </script>
+  </body>
+</html>

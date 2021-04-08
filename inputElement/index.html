@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transitionなどでアニメーションできない要素</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="sectionTitle">プログレスバーをアニメーションさせる</h1>
+      <progress value="0" max="100" class="progressBar"></progress>
+      <button class="playProgress">もう一度はじめから再生する</button>
+    </section>
+
+    <section>
+      <h1 class="sectionTitle">メーターをアニメーションさせる</h1>
+      <meter value="0" max="100" class="meter"></meter>
+      <button class="playMeter">もう一度はじめから再生する</button>
+      <button class="cancelMeter">アニメーションをキャンセルする</button>
+    </section>
+    <script>
+      // アニメーションさせる要素
+      const progress = document.querySelector(".progressBar");
+      // progressのvalue値
+      let progressValue = 0;
+
+      /**
+       * プログレスバーアニメーションの各フレームでの処理
+       * @param time
+       */
+      const progressAnimation = () => {
+        // 移動量が100以下の場合に実行
+        if (progressValue < 100) {
+          progressValue++;
+          // 移動量を要素に適用する
+          progress.setAttribute("value", progressValue);
+          // ここで自分自身を呼び出して再帰処理をする
+          requestAnimationFrame(progressAnimation);
+        }
+      };
+      progressAnimation();
+
+      document.querySelector(".playProgress").addEventListener("click", () => {
+        console.log(progressValue);
+        if (progressValue < 100) {
+          return;
+        }
+        progressValue = 0;
+        progressAnimation();
+      });
+
+      // アニメーションさせる要素
+      const meter = document.querySelector(".meter");
+      // progressのvalue値
+      let meterValue = 0;
+      let meterAnimationId;
+
+      /**
+       * メーターアニメーションの各フレームでの処理
+       * @param time
+       */
+      const meterAnimation = () => {
+        // 移動量が100以下の場合に実行
+        if (meterValue < 100) {
+          meterValue++;
+          // 移動量を要素に適用する
+          meter.setAttribute("value", meterValue);
+          // ここで自分自身を呼び出して再帰処理をし、一意なIDをセット
+          meterAnimationId = requestAnimationFrame(meterAnimation);
+        }
+      };
+      meterAnimation();
+
+      // キャンセルボタンの要素
+      const cancelButton = document.querySelector(".cancelMeter");
+      // キャンセルボタンを押したら実行
+      cancelButton.addEventListener("click", () => {
+        // キャンセル処理。requestAnimationFrame()でセットしたIDを指定する
+        cancelAnimationFrame(meterAnimationId);
+      });
+
+      document.querySelector(".playMeter").addEventListener("click", () => {
+        cancelAnimationFrame(meterAnimationId);
+        meterValue = 0;
+        meterAnimation();
+      });
+    </script>
+  </body>
+</html>
