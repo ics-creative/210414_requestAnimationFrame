@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "DSEG7Classic";
+  src: url("../font/DSEG7Classic-Bold.woff") format("woff2"), url("../font/DSEG7Classic-Bold.woff2") format("woff"), url("../font/DSEG7Classic-Bold.ttf") format("truetype");
+}
 * {
   padding: 0;
   margin: 0;
@@ -19,6 +23,12 @@
   background-color: var(--blue);
 }
 
+.pieChart {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+}
+
 section {
   max-width: 450px;
   margin: 0 auto 24px;
@@ -34,7 +44,8 @@ section {
   margin-bottom: 24px;
 }
 
-progress, meter {
+progress,
+meter {
   display: block;
 }
 
@@ -84,6 +95,51 @@ progress, meter {
   content: "-";
   font-size: 13px;
   margin-right: 0.5em;
+}
+
+.countDown {
+  font-family: "Noto Serif JP", serif;
+  position: relative;
+  height: 136px;
+  padding: 8px;
+  color: #ffe96e;
+  background-color: #000000;
+  text-shadow: 0 0 8px rgba(255, 233, 110, 0.7);
+  border-radius: 2px;
+  box-shadow: 0 0 4px 2px rgba(255, 233, 110, 0.7), inset 0 0 4px 2px rgba(255, 233, 110, 0.7);
+}
+.countDown .en {
+  font-family: "Noto Sans JP", sans-serif;
+}
+.countDown_title {
+  font-weight: 900;
+  font-size: 24px;
+}
+.countDown_title .en {
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: -4px;
+}
+.countDown_ato {
+  position: absolute;
+  left: 8px;
+  font-size: 15px;
+  font-weight: 900;
+}
+.countDown_display {
+  position: absolute;
+  z-index: 0;
+  right: 8px;
+  font-family: "DSEG7Classic";
+  font-size: 70px;
+  text-shadow: 0 0 16px rgba(255, 233, 110, 0.7);
+}
+.countDown_display:before {
+  position: absolute;
+  z-index: -1;
+  content: "00:00:00";
+  color: rgba(255, 233, 110, 0.25);
+  text-shadow: none;
 }
 
 /*# sourceMappingURL=style.css.map */

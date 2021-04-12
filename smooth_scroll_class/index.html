@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>汎用的なスムーススクロール（クラス化）</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <div class="indexListWrapper">
+      <h1 class="indexTitle">Index</h1>
+      <ul class="indexList">
+        <li><a href="#p1">Title1</a></li>
+        <li><a href="#p2">Title2</a></li>
+        <li><a href="#p3">Title3</a></li>
+        <li><a href="#p4">Title4</a></li>
+        <li><a href="#p5">Title5</a></li>
+        <li><a href="#p6">Title6</a></li>
+        <li><a href="#p7">Title7</a></li>
+      </ul>
+    </div>
+
+    <section>
+      <h1 class="sectionTitle" id="p1">Title1</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p2">Title2</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p3">Title3</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p4">Title4</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p5">Title5</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p6">Title6</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+      <h1 class="sectionTitle" id="p7">Title7</h1>
+      <p class="sectionParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestias
+        omnis totam. Accusantium assumenda consequuntur cumque, doloribus eos
+        excepturi exercitationem facilis fugiat, molestias necessitatibus non
+        praesentium quae repellendus tempora ullam!
+      </p>
+    </section>
+    <a href="#" class="backToTop">TOP</a>
+    <script type="module">
+      import {ScrollAnimation} from "./ScrollAnimation.js"
+
+      // スムーススクロールをインスタンス化。コンストラクターとして継続時間を渡す。
+      const SmoothScroll = new ScrollAnimation({ duration: 1000 });
+
+      // トップへ戻る要素をクリックしたらスクロールアニメーション実行
+      document.querySelectorAll("a[href^='#']").forEach((element) => {
+        element.addEventListener("click", (event) => {
+          // デフォルトの挙動をキャンセル
+          event.preventDefault();
+          // ターゲットの要素を取得
+          const targetId = event.target.getAttribute("href");
+          // 移動先のy座標を格納する変数
+          let targetY;
+          if (targetId === "#") {
+            // href="#"の場合はページトップなので0
+            targetY = 0;
+          } else {
+            // ターゲットの要素
+            const targetElement = document.querySelector(targetId);
+            // ページ全体の高さ
+            const documentHeight = document.body.clientHeight;
+            // ターゲットのY座標取得
+            if (targetElement.offsetTop + window.innerHeight > documentHeight) {
+              // ターゲットのY座標+ウィンドウ高さがページ全体の高さを超えたとき（＝そこまでスクロールできない）は、ページ一番したまでの位置を取得
+              targetY = documentHeight - window.innerHeight;
+            } else {
+              // ターゲットのY座標
+              targetY = targetElement.offsetTop;
+            }
+          }
+          // アニメーションを実行
+          SmoothScroll.exeScroll({ target: { y: targetY } });;
+        });
+      });
+    </script>
+  </body>
+</html>

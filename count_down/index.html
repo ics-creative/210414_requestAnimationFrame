@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>カウントダウン</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Serif+JP:wght@500;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="sectionTitle">カウントダウンアニメーション</h1>
+      <div class="countDown">
+        <h1 class="countDown_title">活動限界まで <span class="en">ACTIVE TIME REMAINING:</span></h1>
+        <div class="countDown_ato">あと</div>
+        <div class="countDown_display">01:00:00</div>
+      </div>
+      <button class="play">もう一度はじめから再生する</button>
+    </section>
+
+    <script>
+      // アニメーションさせる要素
+      const countDownElm = document.querySelector(".countDown_display");
+
+      // アニメーション時間（秒×ミリ秒）
+      const countDownTime = 60 * 1000;
+
+      // アニメーションの開始時間を格納する変数
+      let startTime;
+
+      /**
+       * アニメーションの各フレームでの処理
+       * ※requestAnimationFrame()の処理で時間を処理しない。
+       * @param time
+       */
+      const countDownAnimation = (time) => {
+        if (time <= startTime + countDownTime) {
+          let timeRemaining = countDownTime - time + startTime;
+          if (timeRemaining < 0) {
+            timeRemaining = 0;
+          }
+          const displayMin = String(
+            new Date(timeRemaining).getMinutes()
+          ).padStart(2, "0");
+          const displaySec = String(
+            new Date(timeRemaining).getSeconds()
+          ).padStart(2, "0");
+          const displayMilliSec = String(
+            Math.floor(new Date(timeRemaining).getMilliseconds() / 10)
+          ).padStart(2, "0");
+          countDownElm.textContent = `${displayMin}:${displaySec}:${displayMilliSec}`;
+          window.requestAnimationFrame(countDownAnimation);
+        }else {
+          countDownElm.textContent = "00:00:00"
+        }
+      };
+      // アニメーションを実行する
+      startTime = performance.now();
+      countDownAnimation(performance.now());
+
+      document.querySelector("button").addEventListener("click", () => {
+        // アニメーションを実行する
+        startTime = performance.now();
+        countDownAnimation(performance.now());
+      });
+    </script>
+  </body>
+</html>

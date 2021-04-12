@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>円グラフアニメーション</title>
+    <link rel="stylesheet" href="../assets/style/style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="sectionTitle">円グラフのアニメーション</h1>
+      <div class="pieChart"></div>
+      <button class="play">もう一度はじめから再生する</button>
+    </section>
+
+    <script>
+      // アニメーションさせる要素
+      const pieChart = document.querySelector(".pieChart");
+
+      // アニメーション時間
+      const duration = 2000
+
+      // アニメーションの開始時間を格納する変数
+      let startTime;
+
+      /**
+       * イージング関数
+       */
+      const easeOutQuart = (x) => {
+        return 1 - Math.pow(1 - x, 4);
+      };
+
+      /**
+       * アニメーションの各フレームでの処理
+       * @param time
+       */
+      const pieChartAnimation = (time) => {
+        if (time < startTime + duration) {
+          const progress = (time - startTime) / duration;
+          const rate = easeOutQuart(progress);
+          pieChart.style.backgroundImage = `conic-gradient(
+        #f11a50 0,
+        #f11a50 ${65 * rate}%,
+        #7cef00 ${65 * rate}%,
+        #7cef00 ${90 * rate}%,
+        #00dbd9 ${90 * rate}%,
+        #00dbd9 ${100 * rate}%,
+        transparent ${100 * rate}%,
+        transparent 100%
+      )`;
+          window.requestAnimationFrame(pieChartAnimation);
+        }
+      };
+      // アニメーションを実行する
+      startTime = performance.now();
+      pieChartAnimation(performance.now());
+
+      document.querySelector("button").addEventListener("click", () => {
+        // アニメーションを実行する
+        startTime = performance.now();
+        pieChartAnimation(performance.now());
+      });
+    </script>
+  </body>
+</html>
