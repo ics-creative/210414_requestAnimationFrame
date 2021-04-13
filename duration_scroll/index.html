@@ -59,7 +59,7 @@
     </section>
     <button class="backToTop">TOP</button>
     <script>
-      // アニメーション時間
+      // アニメーション時間（ミリ秒）
       const duration = 1000
 
       // アニメーションの開始時間を格納する変数
@@ -77,8 +77,9 @@
         if (time < startTime + duration) {
           // 現在時間の継続時間に対する進捗度を算出
           const progressRate = (time - startTime) / duration;
-          // 移動先はスタート位置からの進捗度の逆比
+          // スクロール位置はスタート位置からの（1 - 進捗度）を掛けたもの
           const scrollY = startScrollY * (1 - progressRate);
+          // 指定した位置へスクロール
           window.scrollTo(0, scrollY);
           // ここで自分自身を呼び出して再帰処理をする
           requestAnimationFrame(scrollAnimation);

@@ -142,4 +142,18 @@ meter {
   text-shadow: none;
 }
 
+.range {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.range input {
+  margin: 0 16px;
+}
+
+.rangeValue {
+  text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */
