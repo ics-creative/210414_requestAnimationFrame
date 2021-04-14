@@ -21,7 +21,7 @@
     <script>
       // アニメーションさせる要素
       const range = document.querySelector("input[type='range']");
-      const display = document.querySelector(".valueDisplay")
+      const display = document.querySelector(".valueDisplay");
 
       // アニメーション時間
       const duration = 200;
@@ -49,9 +49,9 @@
       const incrementAnimation = (time) => {
         if (time < startTime + duration) {
           const progress = (time - startTime) / duration;
-          const rate = easeOutQuart(progress);
+          const rate = Math.abs(easeOutQuart(progress));
           range.value = Number(startValue) + change * rate;
-          display.textContent = range.value
+          display.textContent = range.value;
           window.requestAnimationFrame(incrementAnimation);
         }
       };
@@ -59,31 +59,31 @@
       const decrementAnimation = (time) => {
         if (time < startTime + duration) {
           const progress = (time - startTime) / duration;
-          const rate = easeOutQuart(progress);
+          const rate = Math.abs(easeOutQuart(progress));
           range.value = Number(startValue) - change * rate;
-          display.textContent = range.value
+          display.textContent = range.value;
           window.requestAnimationFrame(decrementAnimation);
         }
       };
 
       document.querySelector(".increment").addEventListener("click", () => {
-        startValue = range.value;
         // アニメーションを実行する
         startTime = performance.now();
+        startValue = range.value;
         incrementAnimation(performance.now());
       });
       document.querySelector(".decrement").addEventListener("click", () => {
-        startValue = range.value;
         // アニメーションを実行する
         startTime = performance.now();
+        startValue = range.value;
         decrementAnimation(performance.now());
       });
 
       // inputの値が変わったら変更
-      range.addEventListener("input",()=>{
-        display.textContent = range.value
-      })
-      display.textContent = range.value
+      range.addEventListener("input", () => {
+        display.textContent = range.value;
+      });
+      display.textContent = range.value;
     </script>
   </body>
 </html>

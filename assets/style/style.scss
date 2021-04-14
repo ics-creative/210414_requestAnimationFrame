@@ -9,6 +9,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 :root {
@@ -26,6 +27,11 @@
   background-color: var(--blue);
 }
 
+button {
+  display: block;
+  margin: 16px 0;
+}
+
 .pieChart {
   width: 400px;
   height: 400px;
@@ -40,7 +46,7 @@ section {
 
 .sectionTitle {
   font-size: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 
 .sectionParagraph {
@@ -98,61 +104,79 @@ meter {
   }
 }
 
-.countDown{
-  font-family: 'Noto Serif JP', serif;
+.countDown {
   position: relative;
   height: 136px;
   padding: 8px;
-  color: rgba(255,233,110,1);
+  margin-bottom: 32px;
+  color: rgba(255, 233, 110, 1);
   background-color: #000000;
-  text-shadow: 0 0 8px rgba(255,233,110,0.7);
+  text-shadow: 0 0 8px rgba(255, 233, 110, 0.7);
   border-radius: 2px;
-  box-shadow: 0 0 4px 2px rgba(255,233,110,0.7),inset 0 0 4px 2px rgba(255,233,110,0.7);
-  .en{
-    font-family: 'Noto Sans JP', sans-serif;
+  box-shadow: 0 0 4px 2px rgba(255, 233, 110, 0.7),
+    inset 0 0 4px 2px rgba(255, 233, 110, 0.7);
+  .en {
+    font-family: "Noto Sans JP", sans-serif;
   }
-  &_title{
+  &_title {
     font-weight: 900;
     font-size: 24px;
-    .en{
+    font-family: "Noto Serif JP", serif;
+    .en {
       font-size: 13px;
       font-weight: 500;
       margin-left: -4px;
     }
   }
-  &_ato{
+  &_ato {
     position: absolute;
     left: 8px;
+    font-family: "Noto Serif JP", serif;
     font-size: 15px;
     font-weight: 900;
   }
-  &_display{
+  &_display {
     position: absolute;
     z-index: 0;
-    right:8px;
+    right: 8px;
     font-family: "DSEG7Classic";
     font-size: 70px;
-    text-shadow: 0 0 16px rgba(255,233,110,0.7);
-    &:before{
+    text-shadow: 0 0 16px rgba(255, 233, 110, 0.7);
+    &:before {
       position: absolute;
       z-index: -1;
-      content: '00:00:00';
-      color: rgba(255,233,110,0.25);
+      content: "00:00:00";
+      color: rgba(255, 233, 110, 0.25);
       text-shadow: none;
     }
   }
 }
 
-.range{
+.range {
   margin-top: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  input{
+  input {
     margin: 0 16px;
   }
 }
 
-.rangeValue{
+.decrement,
+.increment {
+  padding: 4px 8px;
+}
+
+.rangeValue {
   text-align: center;
+}
+.demoTitle {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.demoList {
+  list-style: none;
+  li {
+    margin-bottom: 1em;
+  }
 }

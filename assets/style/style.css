@@ -6,6 +6,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 :root {
@@ -23,6 +24,11 @@
   background-color: var(--blue);
 }
 
+button {
+  display: block;
+  margin: 16px 0;
+}
+
 .pieChart {
   width: 400px;
   height: 400px;
@@ -37,7 +43,7 @@ section {
 
 .sectionTitle {
   font-size: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 
 .sectionParagraph {
@@ -98,10 +104,10 @@ meter {
 }
 
 .countDown {
-  font-family: "Noto Serif JP", serif;
   position: relative;
   height: 136px;
   padding: 8px;
+  margin-bottom: 32px;
   color: #ffe96e;
   background-color: #000000;
   text-shadow: 0 0 8px rgba(255, 233, 110, 0.7);
@@ -114,6 +120,7 @@ meter {
 .countDown_title {
   font-weight: 900;
   font-size: 24px;
+  font-family: "Noto Serif JP", serif;
 }
 .countDown_title .en {
   font-size: 13px;
@@ -123,6 +130,7 @@ meter {
 .countDown_ato {
   position: absolute;
   left: 8px;
+  font-family: "Noto Serif JP", serif;
   font-size: 15px;
   font-weight: 900;
 }
@@ -152,8 +160,25 @@ meter {
   margin: 0 16px;
 }
 
+.decrement,
+.increment {
+  padding: 4px 8px;
+}
+
 .rangeValue {
   text-align: center;
+}
+
+.demoTitle {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.demoList {
+  list-style: none;
+}
+.demoList li {
+  margin-bottom: 1em;
 }
 
 /*# sourceMappingURL=style.css.map */

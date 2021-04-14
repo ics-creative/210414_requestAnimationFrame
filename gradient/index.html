@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>グラデーションアニメーション</title>
+    <style>
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // グラデーションアニメーションさせる要素
+      const body = document.querySelector("body");
+
+      // HSLの色相の角度
+      let degree = 0;
+
+      /**
+       * アニメーションの各フレームでの処理
+       * @param time
+       */
+      const gradientAnimation = () => {
+        // 色相が360度を超えたら戻す
+        if (degree === 361) {
+          degree = 0;
+        }
+        // degreeと45度,90度,135度ずれた色相
+        const degreePlus45 = (degree + 45) % 360;
+        const degreePlus90 = (degree + 90) % 360;
+        const degreePlus135 = (degree + 135) % 360;
+        body.style.backgroundImage = `radial-gradient(circle at center,hsl(${degreePlus135},70%,70%),hsl(${degreePlus90},70%,70%),hsl(${degreePlus45},70%,70%),hsl(${degree},70%,70%))`;
+        degree++;
+        window.requestAnimationFrame(gradientAnimation);
+      };
+
+      gradientAnimation();
+    </script>
+  </body>
+</html>

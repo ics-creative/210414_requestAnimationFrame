@@ -31,7 +31,7 @@
           // 現在時間の継続時間に対する進捗度を算出
           const progressRate = (time - startTime) / duration;
           // 移動量は全体の移動量×進捗度
-          const deltaX = moveX * progressRate
+          const deltaX = moveX * progressRate;
           // 移動量を要素に適用する
           box.style.transform = `translateX(${deltaX}px)`;
           // ここで自分自身を呼び出して再帰処理をする
