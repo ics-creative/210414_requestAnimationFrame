@@ -53,7 +53,7 @@
             Math.floor(new Date(timeRemaining).getMilliseconds() / 10)
           ).padStart(2, "0");
           countDownElm.textContent = `${displayMin}:${displaySec}:${displayMilliSec}`;
-          window.requestAnimationFrame(countDownAnimation);
+          requestAnimationFrame(countDownAnimation);
         }else {
           countDownElm.textContent = "00:00:00"
         }

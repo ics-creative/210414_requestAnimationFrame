@@ -35,7 +35,7 @@
         const degreePlus135 = (degree + 135) % 360;
         body.style.backgroundImage = `radial-gradient(circle at center,hsl(${degreePlus135},70%,70%),hsl(${degreePlus90},70%,70%),hsl(${degreePlus45},70%,70%),hsl(${degree},70%,70%))`;
         degree++;
-        window.requestAnimationFrame(gradientAnimation);
+        requestAnimationFrame(gradientAnimation);
       };
 
       gradientAnimation();

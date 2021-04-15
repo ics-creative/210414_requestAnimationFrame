@@ -53,7 +53,7 @@
           const rate = Math.abs(easeOutQuart(progress));
           range.value = Number(startValue) + change * rate;
           display.textContent = range.value;
-          window.requestAnimationFrame(incrementAnimation);
+          requestAnimationFrame(incrementAnimation);
         }
       };
 
@@ -63,7 +63,7 @@
           const rate = Math.abs(easeOutQuart(progress));
           range.value = Number(startValue) - change * rate;
           display.textContent = range.value;
-          window.requestAnimationFrame(decrementAnimation);
+          requestAnimationFrame(decrementAnimation);
         }
       };
 

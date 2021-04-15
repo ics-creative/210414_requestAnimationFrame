@@ -37,7 +37,7 @@ export class ScrollAnimation {
         this.startPositionY +
         (this.endPositionY - this.startPositionY) * this.easeOutQuart(progress);
       window.scrollTo(scrollValX, scrollValY);
-      this.animationId = window.requestAnimationFrame(this.animation);
+      this.animationId = requestAnimationFrame(this.animation);
     }
   };
 
