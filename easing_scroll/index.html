@@ -58,6 +58,7 @@
         excepturi exercitationem facilis fugiat, molestias necessitatibus non
         praesentium quae repellendus tempora ullam!
       </p>
+      <a href="../" class="backToIndex">一覧に戻る</a>
     </section>
     <button class="backToTop">TOP</button>
     <script>
@@ -92,7 +93,7 @@
           const scrollY = startScrollY * (1 - easeOutCubic(progressRate));
           // 指定した位置へスクロール
           window.scrollTo(0, scrollY);
-          // ここで自分自身を呼び出して再帰処理をする
+          // ここで自分自身を呼び出し、繰り返す
           requestAnimationFrame(scrollAnimation);
         }
       };

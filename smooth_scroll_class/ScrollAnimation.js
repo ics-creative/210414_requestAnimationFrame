@@ -18,16 +18,16 @@ export class ScrollAnimation {
    * @param x
    * @returns {number}
    */
-  easeOutQuart(x) {
+  easeOutQuart = (x) => {
     return 1 - Math.pow(1 - x, 4);
-  }
+  };
 
   /**
    * フレームごとにスクロールを実行する関数です。
    * これを連続的に繰り返すことでアニメーションさせています。
    * @param time
    */
-  animation(time) {
+  animation = (time) => {
     if (time < this.startTime + this.duration) {
       const progress = (time - this.startTime) / this.duration;
       const scrollValX =
@@ -37,29 +37,27 @@ export class ScrollAnimation {
         this.startPositionY +
         (this.endPositionY - this.startPositionY) * this.easeOutQuart(progress);
       window.scrollTo(scrollValX, scrollValY);
-      this.animationId = window.requestAnimationFrame(
-        this.animation.bind(this)
-      );
+      this.animationId = window.requestAnimationFrame(this.animation);
     }
-  }
+  };
 
   /**
    * アニメーションをキャンセルします
    */
-  cancelScroll() {
+  cancelScroll = () => {
     window.cancelAnimationFrame(this.animationId);
-  }
+  };
 
   /**
    * スクロールアニメーションを実行します
    * @param target
    */
-  exeScroll({ target }) {
+  exeScroll = ({ target }) => {
     this.startPositionX = window.scrollX;
     this.startPositionY = window.scrollY;
     this.endPositionX = target.x != null ? target.x : window.scrollX;
     this.endPositionY = target.y != null ? target.y : window.scrollY;
     this.startTime = performance.now();
     this.animation(performance.now());
-  }
+  };
 }

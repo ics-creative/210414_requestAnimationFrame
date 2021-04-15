@@ -17,6 +17,7 @@
       <meter value="0" max="100" class="meter"></meter>
       <button class="playMeter">もう一度はじめから再生する</button>
       <button class="cancelMeter">アニメーションをキャンセルする</button>
+      <a href="../" class="backToIndex">一覧に戻る</a>
     </section>
     <script>
       // アニメーションさせる要素
@@ -34,7 +35,7 @@
           progressValue++;
           // 移動量を要素に適用する
           progress.setAttribute("value", progressValue);
-          // ここで自分自身を呼び出して再帰処理をする
+          // ここで自分自身を呼び出し、繰り返す
           requestAnimationFrame(progressAnimation);
         }
       };

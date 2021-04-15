@@ -10,6 +10,7 @@
       <h1 class="sectionTitle">1秒かけてeaseOutCubicで右に400px移動する</h1>
       <div class="box"></div>
       <button class="play">もう一度はじめから再生する</button>
+      <a href="../" class="backToIndex">一覧に戻る</a>
     </section>
 
     <script>
@@ -43,7 +44,7 @@
           const deltaX = moveX * easeOutCubic(progressRate);
           // 移動量を要素に適用する
           box.style.transform = `translateX(${deltaX}px)`;
-          // ここで自分自身を呼び出して再帰処理をする
+          // ここで自分自身を呼び出し、繰り返す
           requestAnimationFrame(moveAnimation);
         }
       };

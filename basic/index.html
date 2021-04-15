@@ -10,6 +10,7 @@
       <h1 class="sectionTitle">右に400px移動する</h1>
       <div class="box"></div>
       <button class="play">もう一度はじめから再生する</button>
+      <a href="../" class="backToIndex">一覧に戻る</a>
     </section>
 
     <script>
@@ -25,11 +26,11 @@
        */
       const moveAnimation = () => {
         // 移動量が400以下の場合に実行
-        if (moveX <= 400) {
+        if (moveX < 400) {
           moveX++;
           // 移動量を要素に適用する
           box.style.transform = `translateX(${moveX}px)`;
-          // ここで自分自身を呼び出して再帰処理をする
+          // ここで自分自身を呼び出し、繰り返す
           requestAnimationFrame(moveAnimation);
         }
       };

@@ -181,4 +181,10 @@ meter {
   margin-bottom: 1em;
 }
 
+.backToIndex {
+  display: block;
+  margin: 24px 0;
+  font-size: 18px;
+}
+
 /*# sourceMappingURL=style.css.map */
