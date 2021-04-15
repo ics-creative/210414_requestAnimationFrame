@@ -27,16 +27,18 @@
        * @param time
        */
       const moveAnimation = (time) => {
+        // 現在時間の継続時間に対する進捗度を算出
+        const progress = Math.min(1, (time - startTime) / duration);
         // 現在時間がアニメーション終了時間（開始時間+継続時間）未満なら実行
-        if (time < startTime + duration) {
-          // 現在時間の継続時間に対する進捗度を算出
-          const progressRate = (time - startTime) / duration;
+        if (progress <= 1) {
           // 移動量は全体の移動量×進捗度
-          const deltaX = moveX * progressRate;
+          const deltaX = moveX * progress;
           // 移動量を要素に適用する
           box.style.transform = `translateX(${deltaX}px)`;
-          // ここで自分自身を呼び出し、繰り返す
-          requestAnimationFrame(moveAnimation);
+          // 進捗度が1未満（=100%ではない）場合、自分自身を呼び出し、繰り返す
+          if (progress !== 1) {
+            requestAnimationFrame(moveAnimation);
+          }
         }
       };
 

@@ -48,22 +48,27 @@
        * @param time
        */
       const incrementAnimation = (time) => {
-        if (time < startTime + duration) {
-          const progress = (time - startTime) / duration;
+        const progress = Math.min(1, (time - startTime) / duration);
+        if (progress <= 1) {
+          // const progress = (time - startTime) / duration;
           const rate = Math.abs(easeOutQuart(progress));
           range.value = Number(startValue) + change * rate;
           display.textContent = range.value;
-          requestAnimationFrame(incrementAnimation);
+          if (progress !== 1) {
+            requestAnimationFrame(incrementAnimation);
+          }
         }
       };
 
       const decrementAnimation = (time) => {
-        if (time < startTime + duration) {
-          const progress = (time - startTime) / duration;
+        const progress = Math.min(1, (time - startTime) / duration);
+        if (progress <= 1) {
           const rate = Math.abs(easeOutQuart(progress));
           range.value = Number(startValue) - change * rate;
           display.textContent = range.value;
-          requestAnimationFrame(decrementAnimation);
+          if (progress !== 1) {
+            requestAnimationFrame(decrementAnimation);
+          }
         }
       };
 

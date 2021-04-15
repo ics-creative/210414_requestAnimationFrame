@@ -14,7 +14,9 @@
     <section>
       <h1 class="sectionTitle">カウントダウンアニメーション</h1>
       <div class="countDown">
-        <h1 class="countDown_title">活動限界まで <span class="en">ACTIVE TIME REMAINING:</span></h1>
+        <h1 class="countDown_title">
+          活動限界まで <span class="en">ACTIVE TIME REMAINING:</span>
+        </h1>
         <div class="countDown_ato">あと</div>
         <div class="countDown_display">01:00:00</div>
       </div>
@@ -27,7 +29,7 @@
       const countDownElm = document.querySelector(".countDown_display");
 
       // アニメーション時間（秒×ミリ秒）
-      const countDownTime = 60 * 1000;
+      const countDownTime = 2 * 1000;
 
       // アニメーションの開始時間を格納する変数
       let startTime;
@@ -39,10 +41,7 @@
        */
       const countDownAnimation = (time) => {
         if (time <= startTime + countDownTime) {
-          let timeRemaining = countDownTime - time + startTime;
-          if (timeRemaining < 0) {
-            timeRemaining = 0;
-          }
+          const timeRemaining = Math.max(0, countDownTime - time + startTime);
           const displayMin = String(
             new Date(timeRemaining).getMinutes()
           ).padStart(2, "0");
@@ -54,8 +53,8 @@
           ).padStart(2, "0");
           countDownElm.textContent = `${displayMin}:${displaySec}:${displayMilliSec}`;
           requestAnimationFrame(countDownAnimation);
-        }else {
-          countDownElm.textContent = "00:00:00"
+        } else {
+          countDownElm.textContent = "00:00:00";
         }
       };
       // アニメーションを実行する

@@ -28,8 +28,8 @@ export class ScrollAnimation {
    * @param time
    */
   animation = (time) => {
-    if (time < this.startTime + this.duration) {
-      const progress = (time - this.startTime) / this.duration;
+    const progress = Math.min(1, (time - this.startTime) / this.duration);
+    if (progress <= 1) {
       const scrollValX =
         this.startPositionX +
         (this.endPositionX - this.startPositionX) * this.easeOutQuart(progress);
@@ -37,7 +37,9 @@ export class ScrollAnimation {
         this.startPositionY +
         (this.endPositionY - this.startPositionY) * this.easeOutQuart(progress);
       window.scrollTo(scrollValX, scrollValY);
-      this.animationId = requestAnimationFrame(this.animation);
+      if (progress !== 1) {
+        this.animationId = requestAnimationFrame(this.animation);
+      }
     }
   };
 
