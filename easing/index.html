@@ -38,7 +38,7 @@
       const moveAnimation = (time) => {
         // 現在時間の継続時間に対する進捗度を算出
         const progress = Math.min(1, (time - startTime) / duration);
-        // 現在時間がアニメーション終了時間（開始時間+継続時間）未満なら実行
+        // 進捗度が1以下の場合に実行
         if (progress <= 1 ) {
           // 進捗度にイージング関数を通すことで変化量にイージングをつける
           const deltaX = moveX * easeOutCubic(progress);
