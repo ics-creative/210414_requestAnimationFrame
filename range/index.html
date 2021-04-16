@@ -36,6 +36,9 @@
       // アニメーション前の値
       let startValue;
 
+      // プラスかマイナスか
+      let isPlus;
+
       /**
        * イージング関数
        */
@@ -45,44 +48,33 @@
 
       /**
        * アニメーションの各フレームでの処理
-       * @param time
        */
-      const incrementAnimation = (time) => {
-        const progress = Math.min(1, (time - startTime) / duration);
-        if (progress <= 1) {
-          // const progress = (time - startTime) / duration;
-          const rate = Math.abs(easeOutQuart(progress));
-          range.value = Number(startValue) + change * rate;
-          display.textContent = range.value;
-          if (progress !== 1) {
-            requestAnimationFrame(incrementAnimation);
-          }
-        }
-      };
-
-      const decrementAnimation = (time) => {
-        const progress = Math.min(1, (time - startTime) / duration);
-        if (progress <= 1) {
-          const rate = Math.abs(easeOutQuart(progress));
-          range.value = Number(startValue) - change * rate;
-          display.textContent = range.value;
-          if (progress !== 1) {
-            requestAnimationFrame(decrementAnimation);
-          }
+      const moveAnimation = () => {
+        const progress = Math.min(1, (Date.now() - startTime) / duration);
+        const rate = easeOutQuart(progress);
+        // 移動の符号を決める
+        const sign = isPlus ? 1 : -1;
+        console.log(sign);
+        range.value = Number(startValue) + change * rate * sign;
+        display.textContent = range.value;
+        if (progress < 1) {
+          requestAnimationFrame(moveAnimation);
         }
       };
 
       document.querySelector(".increment").addEventListener("click", () => {
         // アニメーションを実行する
-        startTime = performance.now();
+        startTime = Date.now();
         startValue = range.value;
-        incrementAnimation(performance.now());
+        isPlus = true;
+        moveAnimation();
       });
       document.querySelector(".decrement").addEventListener("click", () => {
         // アニメーションを実行する
-        startTime = performance.now();
+        startTime = Date.now();
         startValue = range.value;
-        decrementAnimation(performance.now());
+        isPlus = false;
+        moveAnimation();
       });
 
       // inputの値が変わったら変更

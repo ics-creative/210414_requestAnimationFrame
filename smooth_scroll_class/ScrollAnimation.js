@@ -25,23 +25,20 @@ export class ScrollAnimation {
   /**
    * フレームごとにスクロールを実行する関数です。
    * これを連続的に繰り返すことでアニメーションさせています。
-   * @param time
    */
-  animation(time) {
-    const progress = Math.min(1, (time - this.startTime) / this.duration);
-    if (progress <= 1) {
-      const scrollValX =
-        this.startPositionX +
-        (this.endPositionX - this.startPositionX) * this.easeOutQuart(progress);
-      const scrollValY =
-        this.startPositionY +
-        (this.endPositionY - this.startPositionY) * this.easeOutQuart(progress);
-      window.scrollTo(scrollValX, scrollValY);
-      if (progress !== 1) {
-        this.animationId = requestAnimationFrame((time) => {
-          this.animation(time);
-        });
-      }
+  animation() {
+    const progress = Math.min(1, (Date.now() - this.startTime) / this.duration);
+    const scrollValX =
+      this.startPositionX +
+      (this.endPositionX - this.startPositionX) * this.easeOutQuart(progress);
+    const scrollValY =
+      this.startPositionY +
+      (this.endPositionY - this.startPositionY) * this.easeOutQuart(progress);
+    window.scrollTo(scrollValX, scrollValY);
+    if (progress < 1) {
+      this.animationId = requestAnimationFrame(() => {
+        this.animation();
+      });
     }
   }
 
@@ -61,7 +58,7 @@ export class ScrollAnimation {
     this.startPositionY = window.scrollY;
     this.endPositionX = target.x != null ? target.x : window.scrollX;
     this.endPositionY = target.y != null ? target.y : window.scrollY;
-    this.startTime = performance.now();
-    this.animation(performance.now());
+    this.startTime = Date.now();
+    this.animation();
   }
 }

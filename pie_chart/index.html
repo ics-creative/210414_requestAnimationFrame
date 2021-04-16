@@ -32,13 +32,11 @@
 
       /**
        * アニメーションの各フレームでの処理
-       * @param time
        */
-      const pieChartAnimation = (time) => {
-        const progress = Math.min(1, (time - startTime) / duration);
-        if (progress <= 1) {
-          const rate = easeOutQuart(progress);
-          pieChart.style.backgroundImage = `conic-gradient(
+      const pieChartAnimation = () => {
+        const progress = Math.min(1, (Date.now() - startTime) / duration);
+        const rate = easeOutQuart(progress);
+        pieChart.style.backgroundImage = `conic-gradient(
         #f11a50 0,
         #f11a50 ${65 * rate}%,
         #7cef00 ${65 * rate}%,
@@ -48,19 +46,18 @@
         transparent ${100 * rate}%,
         transparent 100%
       )`;
-          if (progress !== 1) {
-            requestAnimationFrame(pieChartAnimation);
-          }
+        if (progress < 1) {
+          requestAnimationFrame(pieChartAnimation);
         }
       };
       // アニメーションを実行する
-      startTime = performance.now();
-      pieChartAnimation(performance.now());
+      startTime = Date.now();
+      pieChartAnimation();
 
       document.querySelector("button").addEventListener("click", () => {
         // アニメーションを実行する
-        startTime = performance.now();
-        pieChartAnimation(performance.now());
+        startTime = Date.now();
+        pieChartAnimation();
       });
     </script>
   </body>

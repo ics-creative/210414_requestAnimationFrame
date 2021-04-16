@@ -29,7 +29,7 @@
       const countDownElm = document.querySelector(".countDown_display");
 
       // アニメーション時間（秒×ミリ秒）
-      const countDownTime = 2 * 1000;
+      const countDownTime = 60 * 1000;
 
       // アニメーションの開始時間を格納する変数
       let startTime;
@@ -37,34 +37,32 @@
       /**
        * アニメーションの各フレームでの処理
        * ※requestAnimationFrame()の処理で時間を処理しない。
-       * @param time
        */
-      const countDownAnimation = (time) => {
-        if (time <= startTime + countDownTime) {
-          const timeRemaining = Math.max(0, countDownTime - time + startTime);
-          const displayMin = String(
-            new Date(timeRemaining).getMinutes()
-          ).padStart(2, "0");
-          const displaySec = String(
-            new Date(timeRemaining).getSeconds()
-          ).padStart(2, "0");
-          const displayMilliSec = String(
-            Math.floor(new Date(timeRemaining).getMilliseconds() / 10)
-          ).padStart(2, "0");
-          countDownElm.textContent = `${displayMin}:${displaySec}:${displayMilliSec}`;
-          requestAnimationFrame(countDownAnimation);
-        } else {
-          countDownElm.textContent = "00:00:00";
-        }
+      const countDownAnimation = () => {
+        const timeRemaining = Math.max(
+          0,
+          countDownTime - Date.now() + startTime
+        );
+        const displayMin = String(
+          new Date(timeRemaining).getMinutes()
+        ).padStart(2, "0");
+        const displaySec = String(
+          new Date(timeRemaining).getSeconds()
+        ).padStart(2, "0");
+        const displayMilliSec = String(
+          Math.floor(new Date(timeRemaining).getMilliseconds() / 10)
+        ).padStart(2, "0");
+        countDownElm.textContent = `${displayMin}:${displaySec}:${displayMilliSec}`;
+        requestAnimationFrame(countDownAnimation);
       };
       // アニメーションを実行する
-      startTime = performance.now();
-      countDownAnimation(performance.now());
+      startTime = Date.now();
+      countDownAnimation();
 
       document.querySelector("button").addEventListener("click", () => {
         // アニメーションを実行する
-        startTime = performance.now();
-        countDownAnimation(performance.now());
+        startTime = Date.now();
+        countDownAnimation();
       });
     </script>
   </body>

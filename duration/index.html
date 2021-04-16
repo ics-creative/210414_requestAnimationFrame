@@ -24,31 +24,27 @@
 
       /**
        * アニメーションの各フレームでの処理
-       * @param time
        */
-      const moveAnimation = (time) => {
+      const moveAnimation = () => {
         // 現在時間の継続時間に対する進捗度を算出
-        const progress = Math.min(1, (time - startTime) / duration);
-        // 進捗度が1以下の場合に実行
-        if (progress <= 1) {
-          // 移動量は全体の移動量×進捗度
-          const deltaX = moveX * progress;
-          // 移動量を要素に適用する
-          box.style.transform = `translateX(${deltaX}px)`;
-          // 進捗度が1未満（=100%ではない）場合、自分自身を呼び出し、繰り返す
-          if (progress !== 1) {
-            requestAnimationFrame(moveAnimation);
-          }
+        const progress = Math.min(1, (Date.now() - startTime) / duration);
+        // 移動量は全体の移動量×進捗度
+        const deltaX = moveX * progress;
+        // 移動量を要素に適用する
+        box.style.transform = `translateX(${deltaX}px)`;
+        // 進捗度が1未満（=100%ではない）場合、自分自身を呼び出し、繰り返す
+        if (progress !== 1) {
+          requestAnimationFrame(moveAnimation);
         }
       };
 
-      // performance.now()で開始時間をセットしてアニメーションを実行する
-      startTime = performance.now();
-      moveAnimation(startTime);
+      // Date.now()で開始時間をセットしてアニメーションを実行する
+      startTime = Date.now();
+      moveAnimation();
 
       document.querySelector("button").addEventListener("click", () => {
-        startTime = performance.now();
-        moveAnimation(startTime);
+        startTime = Date.now();
+        moveAnimation();
       });
     </script>
   </body>

@@ -107,21 +107,17 @@
 
       /**
        * アニメーションの各フレームでの処理
-       * @param time
        */
-      const scrollAnimation = (time) => {
+      const scrollAnimation = () => {
         // 現在時間の継続時間に対する進捗度を算出
-        const progress = Math.min(1, (time - startTime) / duration);
-        // 進捗度が1以下の場合に実行
-        if (progress <= 1) {
-          const scrollY =
-            startScrollY +
-            (targetScrollY - startScrollY) * easeOutBounce(progress);
-          window.scrollTo(0, scrollY);
-          // 進捗度が1未満（=100%ではない）場合、自分自身を呼び出し、繰り返す
-          if (progress !== 1) {
-            requestAnimationFrame(scrollAnimation);
-          }
+        const progress = Math.min(1, (Date.now() - startTime) / duration);
+        const scrollY =
+          startScrollY +
+          (targetScrollY - startScrollY) * easeOutBounce(progress);
+        window.scrollTo(0, scrollY);
+        // 進捗度が1未満（=100%ではない）場合、自分自身を呼び出し、繰り返す
+        if (progress < 1) {
+          requestAnimationFrame(scrollAnimation);
         }
       };
 
@@ -149,11 +145,11 @@
               targetScrollY = targetElement.offsetTop;
             }
           }
-          // performance.now()で開始時間をセット
-          startTime = performance.now();
+          // Date.now()で開始時間をセット
+          startTime = Date.now();
           // 現在のスクロール位置をセット
           startScrollY = window.scrollY;
-          scrollAnimation(startTime);
+          scrollAnimation();
         });
       });
     </script>
